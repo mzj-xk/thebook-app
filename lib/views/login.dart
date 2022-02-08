@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:thebook_app/service/repository.dart';
+import 'package:thebook_app/views/home.dart';
 import 'package:thebook_app/views/register.dart';
 
 class Login extends StatefulWidget {
@@ -12,6 +14,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   bool passwordVisible = false;
+  bool error = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,19 @@ class _LoginState extends State<Login> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Repository.login(email: _email.text, password: _password.text)
+                      .then((response) => response.code == '1'
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Home(),
+                              ),
+                            )
+                          : setState(() {
+                              error = true;
+                            }));
+                },
                 child: const Text("登录"),
               ),
             ),
@@ -60,7 +75,11 @@ class _LoginState extends State<Login> {
                     ),
                   );
                 },
-                child: const Text("没有账号? 立即注册"))
+                child: const Text("没有账号? 立即注册")),
+            Text(
+              error ? '邮箱或账号错误' : '',
+              style: const TextStyle(color: Colors.red),
+            )
           ],
         ),
       ),
