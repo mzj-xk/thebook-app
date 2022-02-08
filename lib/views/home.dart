@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:thebook_app/global/user.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,7 +12,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("home"),
+      body: SafeArea(
+        child: Text(User.email),
+      ),
     );
   }
 }
