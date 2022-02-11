@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thebook_app/views/login.dart';
+import 'package:thebook_app/views/tab_navigator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      home: const TabNavigator(),
     );
   }
 }

@@ -1,5 +1,6 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:dio/dio.dart';
+import 'package:thebook_app/models/find_all_book.dart';
 import 'package:thebook_app/models/login_bean.dart';
 
 class BaseNetwork {
@@ -32,11 +33,14 @@ class Repository {
       return response.statusMessage;
     }
   }
-}
 
-// void main(List<String> args) {
-//   var test1 = BaseNetwork();
-//   var test2 = BaseNetwork();
-//   print(identical(test1, test2));
-//   print(test1 == test2);
-// }
+  static Future<FindAllBook> findAllBook() async {
+    var response = await _network.dio.get('/book/findAll');
+    // if (response.statusCode == 200) {
+    //   return FindAllBook.fromJson(response.data);
+    // } else {
+    //   return response.statusMessage;
+    // }
+    return FindAllBook.fromJson(response.data);
+  }
+}
